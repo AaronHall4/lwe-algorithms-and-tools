@@ -1,5 +1,6 @@
 CC=g++
 CFLAGS=-Wall -Wextra -std=c++11
+LDLIBS=-lntl -lgmp -lm
 PROGS=test
 
 .PHONY: all clean
@@ -7,8 +8,10 @@ PROGS=test
 all: $(PROGS)
 
 clean:
-	rm -rf *.o $(PROGS)
+	rm -rf *.o a.out $(PROGS)
 
-test: lattice.o
+test: llltest.o
+	$(CC) llltest.o $(LDLIBS) -o test
 
-lattice.o: lattice.cpp lattice.h
+llltest.o: llltest.cpp
+
